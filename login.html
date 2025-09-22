@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - PARYATAK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="index.html">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="helpline.html" class="dropdown-item">Police</a>
+                        <a href="helpline.html" class="dropdown-item">Hospital</a>
+                        <a href="helpline.html" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html" class="active">Login</a>
+                <button id="carbon-calculator-btn" class="carbon-btn">🌱 Carbon Calculator</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="login-main">
+        <div class="login-container">
+            <!-- Type Selection Buttons -->
+            <div class="type-selector">
+                <button class="type-btn active" data-type="user">User</button>
+                <button class="type-btn" data-type="agent">Agent</button>
+                <button class="type-btn" data-type="admin">Admin</button>
+            </div>
+
+            <!-- Login/Signup Toggle -->
+            <div class="auth-toggle">
+                <button class="toggle-btn active" data-mode="login">Login</button>
+                <button class="toggle-btn" data-mode="signup">Sign Up</button>
+            </div>
+
+            <!-- User Panel -->
+            <div class="auth-panel active" id="user-panel">
+                <div class="login-form" id="user-login">
+                    <h2>User Login</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="user-email">Email Address</label>
+                            <input type="email" id="user-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password">Password</label>
+                            <input type="password" id="user-password" name="password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="submit-btn">Login as User</button>
+                    </form>
+                </div>
+
+                <div class="signup-form" id="user-signup">
+                    <h2>User Sign Up</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="user-signup-name">Full Name</label>
+                            <input type="text" id="user-signup-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-signup-email">Email Address</label>
+                            <input type="email" id="user-signup-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-signup-phone">Phone Number</label>
+                            <input type="tel" id="user-signup-phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-signup-password">Password</label>
+                            <input type="password" id="user-signup-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user-signup-confirm">Confirm Password</label>
+                            <input type="password" id="user-signup-confirm" name="confirm-password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#">Terms & Conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">Sign Up as User</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Agent Panel -->
+            <div class="auth-panel" id="agent-panel">
+                <div class="login-form" id="agent-login">
+                    <h2>Agent Login</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="agent-email">Email Address</label>
+                            <input type="email" id="agent-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-password">Password</label>
+                            <input type="password" id="agent-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-code">Agent Code</label>
+                            <input type="text" id="agent-code" name="agent-code" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="submit-btn">Login as Agent</button>
+                    </form>
+                </div>
+
+                <div class="signup-form" id="agent-signup">
+                    <h2>Agent Sign Up</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="agent-signup-name">Full Name</label>
+                            <input type="text" id="agent-signup-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-email">Email Address</label>
+                            <input type="email" id="agent-signup-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-phone">Phone Number</label>
+                            <input type="tel" id="agent-signup-phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-code">Agent Code</label>
+                            <input type="text" id="agent-signup-code" name="agent-code" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-license">License Number</label>
+                            <input type="text" id="agent-signup-license" name="license" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-password">Password</label>
+                            <input type="password" id="agent-signup-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agent-signup-confirm">Confirm Password</label>
+                            <input type="password" id="agent-signup-confirm" name="confirm-password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#">Terms & Conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">Sign Up as Agent</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Panel -->
+            <div class="auth-panel" id="admin-panel">
+                <div class="login-form" id="admin-login">
+                    <h2>Admin Login</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="admin-email">Admin Email</label>
+                            <input type="email" id="admin-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-password">Password</label>
+                            <input type="password" id="admin-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-key">Admin Key</label>
+                            <input type="password" id="admin-key" name="admin-key" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="remember">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="submit-btn">Login as Admin</button>
+                    </form>
+                </div>
+
+                <div class="signup-form" id="admin-signup">
+                    <h2>Admin Registration</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="admin-signup-name">Full Name</label>
+                            <input type="text" id="admin-signup-name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-email">Admin Email</label>
+                            <input type="email" id="admin-signup-email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-phone">Phone Number</label>
+                            <input type="tel" id="admin-signup-phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-key">Admin Key</label>
+                            <input type="password" id="admin-signup-key" name="admin-key" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-department">Department</label>
+                            <select id="admin-signup-department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="tourism">Tourism</option>
+                                <option value="management">Management</option>
+                                <option value="support">Support</option>
+                                <option value="technical">Technical</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-password">Password</label>
+                            <input type="password" id="admin-signup-password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-signup-confirm">Confirm Password</label>
+                            <input type="password" id="admin-signup-confirm" name="confirm-password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#">Terms & Conditions</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="submit-btn">Register as Admin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Left side links -->
+            <div class="footer-left">
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Help & Support</h4>
+                    <a href="#" class="footer-link">Help Us</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+
+            <!-- Center - PARYATAK -->
+            <div class="footer-center">
+                <h2 class="footer-logo">PARYATAK</h2>
+                <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+            </div>
+
+            <!-- Right side links -->
+            <div class="footer-right">
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <a href="#" class="footer-link">Helpline</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#" class="footer-link">Map</a>
+                    <a href="#" class="footer-link">Directions</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+        </div>
+    </footer>
+
+    <script src="login.js"></script>
+    <script src="carbon-calculator.js"></script>
+</body>
+</html>

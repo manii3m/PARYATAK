@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Packages - PARYATAK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Package Page Specific Styles */
+        .package-main {
+            padding-top: 80px;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #f5f7fa, #e4e8f0);
+        }
+        
+        .package-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #d4a017, #f1c40f);
+            border-radius: 2px;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            z-index: 1;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .package-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            font-family: 'Exo 2', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .package-details {
+            margin: 15px 0;
+        }
+        
+        .package-details p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .package-details p span {
+            margin-right: 8px;
+        }
+        
+        .price-section {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #7f8c8d;
+            margin-right: 10px;
+        }
+        
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #16a085;
+        }
+        
+        .rating {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .stars {
+            color: #f39c12;
+            margin-right: 10px;
+        }
+        
+        .review-count {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .book-now-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #d4a017, #f1c40f);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Exo 2', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .book-now-btn:hover {
+            background: linear-gradient(to right, #f1c40f, #d4a017);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 160, 23, 0.4);
+        }
+        
+        .features-list {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .features-list li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 5px;
+        }
+        
+        .features-list li::before {
+            content: '✓';
+            color: #16a085;
+            margin-right: 8px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .packages-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="index.html">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="helpline.html" class="dropdown-item">Police</a>
+                        <a href="helpline.html" class="dropdown-item">Hospital</a>
+                        <a href="helpline.html" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="package-main">
+        <div class="package-container">
+            <!-- Package Section Header -->
+            <div class="section-header">
+                <h2>
+                    <span class="icon">🎁</span>
+                    Exclusive Tour Packages
+                </h2>
+                <p>Discover the best of Jharkhand with our carefully curated tour packages</p>
+            </div>
+            
+            <!-- Packages Grid -->
+            <div class="packages-grid">
+                <!-- Package 1 - Ranchi Explorer -->
+                <div class="package-card">
+                    <div class="discount-badge">20% OFF</div>
+                    <div class="card-image">
+                        <img src="MEDIA/package.jpg" alt="Ranchi Explorer Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Ranchi Explorer</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 3 Days, 2 Nights</p>
+                            <p><span>🏨</span> Accommodation: 3-Star Hotel</p>
+                            <p><span>🚌</span> Transportation: AC Vehicle</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Visit to Ranchi Hill and Tagore Hill</li>
+                            <li>Explore Dassam Falls and Hundru Falls</li>
+                            <li>Local cuisine experience</li>
+                            <li>Professional guide assistance</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹12,999</span>
+                            <span class="current-price">₹9,999</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <div class="review-count">(128 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Package 2 - Wildlife Adventure -->
+                <div class="package-card">
+                    <div class="discount-badge">15% OFF</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1504173010664-32509aeebb62?w=500&h=300&fit=crop" alt="Wildlife Adventure Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Wildlife Adventure</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 4 Days, 3 Nights</p>
+                            <p><span>🏨</span> Accommodation: Jungle Resort</p>
+                            <p><span>🚌</span> Transportation: Safari Jeep</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Betla National Park safari</li>
+                            <li>Bird watching at Hazaribagh Wildlife Sanctuary</li>
+                            <li>Tribal village visit</li>
+                            <li>Campfire and cultural evening</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹18,999</span>
+                            <span class="current-price">₹15,999</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <div class="review-count">(96 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Package 3 - Waterfall Trail -->
+                <div class="package-card">
+                    <div class="discount-badge">25% OFF</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1455577380025-4321f1e1dca7?w=500&h=300&fit=crop" alt="Waterfall Trail Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Waterfall Trail</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 5 Days, 4 Nights</p>
+                            <p><span>🏨</span> Accommodation: Mix of Hotels & Camps</p>
+                            <p><span>🚌</span> Transportation: AC Vehicle</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Visit to Dassam, Hundru, and Jonha Falls</li>
+                            <li>Trekking and adventure activities</li>
+                            <li>Photography sessions</li>
+                            <li>Picnic lunch at scenic spots</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹22,999</span>
+                            <span class="current-price">₹16,999</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <div class="review-count">(152 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Package 4 - Cultural Heritage -->
+                <div class="package-card">
+                    <div class="discount-badge">10% OFF</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1524729429516-485db0307e59?w=500&h=300&fit=crop" alt="Cultural Heritage Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Cultural Heritage</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 4 Days, 3 Nights</p>
+                            <p><span>🏨</span> Accommodation: Heritage Hotels</p>
+                            <p><span>🚌</span> Transportation: AC Vehicle</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Visit to tribal museums and villages</li>
+                            <li>Traditional art and craft workshops</li>
+                            <li>Cultural performances</li>
+                            <li>Local cuisine cooking class</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹14,999</span>
+                            <span class="current-price">₹13,499</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <div class="review-count">(87 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Package 5 - Adventure Retreat -->
+                <div class="package-card">
+                    <div class="discount-badge">30% OFF</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1533130061792-64b345e4a833?w=500&h=300&fit=crop" alt="Adventure Retreat Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Adventure Retreat</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 6 Days, 5 Nights</p>
+                            <p><span>🏨</span> Accommodation: Adventure Camps</p>
+                            <p><span>🚌</span> Transportation: Specialized Vehicles</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Rock climbing at Patratu Valley</li>
+                            <li>Paragliding experience</li>
+                            <li>River rafting adventure</li>
+                            <li>Night camping under stars</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹28,999</span>
+                            <span class="current-price">₹19,999</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★★</div>
+                            <div class="review-count">(215 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <!-- Package 6 - Family Fun -->
+                <div class="package-card">
+                    <div class="discount-badge">15% OFF</div>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=500&h=300&fit=crop" alt="Family Fun Package">
+                    </div>
+                    <div class="card-content">
+                        <h3>Family Fun</h3>
+                        <div class="package-details">
+                            <p><span>⏱️</span> Duration: 4 Days, 3 Nights</p>
+                            <p><span>🏨</span> Accommodation: Family Resorts</p>
+                            <p><span>🚌</span> Transportation: AC Vehicle</p>
+                        </div>
+                        <div class="features-list">
+                            <li>Visit to Jubilee Park and Tata Steel Zoological Park</li>
+                            <li>Boating at Dimna Lake</li>
+                            <li>Fun activities for children</li>
+                            <li>Family-friendly accommodations</li>
+                        </div>
+                        <div class="price-section">
+                            <span class="original-price">₹16,999</span>
+                            <span class="current-price">₹14,499</span>
+                        </div>
+                        <div class="rating">
+                            <div class="stars">★★★★☆</div>
+                            <div class="review-count">(124 reviews)</div>
+                        </div>
+                        <button class="book-now-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+   <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Left side links -->
+        <div class="footer-left">
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">YouTube</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Help & Support</h4>
+                <a href="#" class="footer-link">Help Us</a>
+                <a href="#" class="footer-link">Feedback</a>
+            </div>
+        </div>
+
+        <!-- Center - PARYATAK -->
+        <div class="footer-center">
+            <h2 class="footer-logo">PARYATAK</h2>
+            <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+        </div>
+
+        <!-- Right side links -->
+        <div class="footer-right">
+            <div class="footer-section">
+                <h4>Contact & Support</h4>
+                <a href="#" class="footer-link">Helpline</a>
+                <a href="#" class="footer-link">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#" class="footer-link">Map</a>
+                <a href="#" class="footer-link">Directions</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+    </div>
+</footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Package Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Book Now Button Functionality
+            const bookButtons = document.querySelectorAll('.book-now-btn');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const packageName = this.closest('.package-card').querySelector('h3').textContent;
+                    alert(`Thank you for choosing the ${packageName} package! Redirecting to booking page...`);
+                    // In a real application, this would redirect to a booking form
+                });
+            });
+            
+            // Add class to body for CSS targeting
+            document.body.classList.add('package-page');
+        });
+    </script>
+</body>
+</html>

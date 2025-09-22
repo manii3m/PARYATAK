@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARYATAK - Coupons & Discounts</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Coupon Page Specific Styles */
+        .coupon-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            color: #2e4600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .coupons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .coupon-card {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px dashed #2e4600;
+        }
+
+        .coupon-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .coupon-header {
+            background: linear-gradient(135deg, #2e4600, #d4a017);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .coupon-content {
+            padding: 20px;
+        }
+
+        .discount-amount {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #d4a017;
+            text-align: center;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .coupon-details {
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .coupon-details p {
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .coupon-code {
+            background: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2e4600;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .coupon-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .expiry-date {
+            color: #d4341c;
+            font-weight: bold;
+        }
+
+        .terms-link {
+            color: #2e4600;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .redeem-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2e4600, #d4a017);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .redeem-btn:hover {
+            background: linear-gradient(135deg, #d4a017, #2e4600);
+            transform: scale(1.05);
+        }
+
+        .locked-section {
+            background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 10;
+        }
+
+        .locked-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .login-btn {
+            background: #d4a017;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #2e4600;
+            transform: scale(1.05);
+        }
+
+        .premium-coupons {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .premium-coupon {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            border: 2px dashed gold;
+            filter: blur(5px);
+        }
+
+        .premium-header {
+            background: linear-gradient(135deg, #d4a017, #ffd700);
+            color: #2e4600;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-container {
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #2e4600;
+            font-weight: bold;
+            color: #2e4600;
+        }
+
+        .tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .coupons-grid, .premium-coupons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="#">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="helpline.html" class="dropdown-item">Police</a>
+                        <a href="helpline.html" class="dropdown-item">Hospital</a>
+                        <a href="helpline.html" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="coupon-container">
+            <!-- Coupon Section Header -->
+            <div class="section-header">
+                <h2>
+                    <span class="icon">🎟️</span>
+                    Exclusive Coupons & Discounts
+                </h2>
+                <p>Save big on your Jharkhand adventures with our special offers</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="all">All Coupons</div>
+                    <div class="tab" data-tab="packages">Package Discounts</div>
+                    <div class="tab" data-tab="seasonal">Seasonal Offers</div>
+                    <div class="tab" data-tab="activities">Activity Discounts</div>
+                </div>
+            </div>
+            
+            <!-- All Coupons Tab Content -->
+            <div class="tab-content active" id="all">
+                <div class="coupons-grid">
+                    <!-- Coupon 1 - First Time Booking -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">First Time Booking</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">25% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>🏨</span> Valid on all accommodation bookings</p>
+                                <p><span>🚌</span> Minimum booking value: ₹5,000</p>
+                                <p><span>🗓️</span> Valid for new users only</p>
+                            </div>
+                            <div class="coupon-code">
+                                WELCOME25
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 31 Dec 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 2 - Weekend Getaway -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">Weekend Getaway</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">15% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>🏞️</span> Valid on all weekend packages</p>
+                                <p><span>🚌</span> Includes transportation & accommodation</p>
+                                <p><span>🗓️</span> Valid for Friday to Sunday bookings</p>
+                            </div>
+                            <div class="coupon-code">
+                                WEEKEND15
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 30 Nov 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 3 - Family Package -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">Family Package</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">20% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>👨‍👩‍👧‍👦</span> Valid for groups of 4 or more</p>
+                                <p><span>🏨</span> Includes free upgrade where available</p>
+                                <p><span>🍽️</span> Complimentary breakfast for children</p>
+                            </div>
+                            <div class="coupon-code">
+                                FAMILY20
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 31 Oct 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 4 - Adventure Activities -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">Adventure Activities</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">30% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>🧗‍♂️</span> Valid on all adventure activities</p>
+                                <p><span>🚵‍♀️</span> Includes trekking, rafting & camping</p>
+                                <p><span>🛡️</span> Includes insurance coverage</p>
+                            </div>
+                            <div class="coupon-code">
+                                ADVENTURE30
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 15 Nov 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 5 - Cultural Tour -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">Cultural Tour</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">10% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>🏛️</span> Valid on all cultural tour packages</p>
+                                <p><span>🎭</span> Includes local performances & workshops</p>
+                                <p><span>🧑‍🏫</span> Expert guide included</p>
+                            </div>
+                            <div class="coupon-code">
+                                CULTURE10
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 31 Dec 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Coupon 6 - Early Bird -->
+                    <div class="coupon-card">
+                        <div class="coupon-header">Early Bird Special</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">15% OFF</div>
+                            <div class="coupon-details">
+                                <p><span>🕒</span> Book 30 days in advance</p>
+                                <p><span>📅</span> Valid on all packages</p>
+                                <p><span>💰</span> No minimum booking amount</p>
+                            </div>
+                            <div class="coupon-code">
+                                EARLY15
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <div class="coupon-footer">
+                                <span class="expiry-date">Expires: 31 Dec 2024</span>
+                                <span class="terms-link">T&C Apply</span>
+                            </div>
+                            <button class="redeem-btn">Redeem Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Package Discounts Tab Content -->
+            <div class="tab-content" id="packages">
+                <!-- Package discount coupons will be shown here -->
+            </div>
+
+            <!-- Seasonal Offers Tab Content -->
+            <div class="tab-content" id="seasonal">
+                <!-- Seasonal offer coupons will be shown here -->
+            </div>
+
+            <!-- Activity Discounts Tab Content -->
+            <div class="tab-content" id="activities">
+                <!-- Activity discount coupons will be shown here -->
+            </div>
+
+            <!-- Premium Locked Section -->
+            <div class="locked-section">
+                <div class="locked-overlay">
+                    <div class="locked-icon">🔒</div>
+                    <h3>Premium Coupons Available for Registered Users</h3>
+                    <p>Login to access exclusive discounts up to 50% off!</p>
+                    <button class="login-btn" onclick="window.location.href='login.html'">Login Now</button>
+                </div>
+
+                <div class="section-header">
+                    <h2>
+                        <span class="icon">✨</span>
+                        Premium Member Exclusive Offers
+                    </h2>
+                    <p>Special discounts only for our loyal customers</p>
+                </div>
+
+                <div class="premium-coupons">
+                    <!-- Premium Coupon 1 -->
+                    <div class="premium-coupon">
+                        <div class="premium-header">VIP Package</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">50% OFF</div>
+                            <div class="coupon-details">
+                                <p>Premium accommodation with luxury amenities</p>
+                                <p>Private guided tours included</p>
+                                <p>Complimentary airport transfers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium Coupon 2 -->
+                    <div class="premium-coupon">
+                        <div class="premium-header">Loyalty Reward</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">40% OFF</div>
+                            <div class="coupon-details">
+                                <p>For customers with 3+ bookings</p>
+                                <p>Valid on any package or activity</p>
+                                <p>Combinable with seasonal offers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Premium Coupon 3 -->
+                    <div class="premium-coupon">
+                        <div class="premium-header">Anniversary Special</div>
+                        <div class="coupon-content">
+                            <div class="discount-amount">45% OFF</div>
+                            <div class="coupon-details">
+                                <p>Romantic getaway packages</p>
+                                <p>Complimentary candlelight dinner</p>
+                                <p>Special room decoration included</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+ <!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Left side links -->
+        <div class="footer-left">
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">YouTube</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Help & Support</h4>
+                <a href="#" class="footer-link">Help Us</a>
+                <a href="#" class="footer-link">Feedback</a>
+            </div>
+        </div>
+
+        <!-- Center - PARYATAK -->
+        <div class="footer-center">
+            <h2 class="footer-logo">PARYATAK</h2>
+            <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+        </div>
+
+        <!-- Right side links -->
+        <div class="footer-right">
+            <div class="footer-section">
+                <h4>Contact & Support</h4>
+                <a href="#" class="footer-link">Helpline</a>
+                <a href="#" class="footer-link">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#" class="footer-link">Map</a>
+                <a href="#" class="footer-link">Directions</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+    </div>
+</footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Coupon Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Copy Button Functionality
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const couponCode = this.parentElement.textContent.trim().split('\n')[0];
+                    navigator.clipboard.writeText(couponCode).then(() => {
+                        const originalText = this.textContent;
+                        this.textContent = 'Copied!';
+                        setTimeout(() => {
+                            this.textContent = originalText;
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Redeem Button Functionality
+            const redeemButtons = document.querySelectorAll('.redeem-btn');
+            redeemButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const couponCode = this.parentElement.querySelector('.coupon-code').textContent.trim().split('\n')[0];
+                    const couponType = this.parentElement.parentElement.querySelector('.coupon-header').textContent;
+                    alert(`Coupon ${couponCode} for ${couponType} has been applied! Redirecting to booking page...`);
+                    // In a real application, this would redirect to a booking form with the coupon applied
+                });
+            });
+            
+            // Terms & Conditions Popup
+            const termsLinks = document.querySelectorAll('.terms-link');
+            termsLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    alert('Terms & Conditions:\n\n• Coupons are valid for one-time use only\n• Cannot be combined with other offers unless specified\n• Valid only for the specified packages or activities\n• Subject to availability\n• PARYATAK reserves the right to modify or cancel offers at any time');
+                });
+            });
+            
+            // Add class to body for CSS targeting
+            document.body.classList.add('coupon-page');
+        });
+    </script>
+</body>
+</html>

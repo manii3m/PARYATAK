@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Helplines - PARYATAK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .helpline-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .helpline-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .helpline-header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .helpline-header p {
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .helpline-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .helpline-category {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 25px;
+            width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .helpline-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .helpline-category h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e7e7e7;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .emergency-number {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        
+        .emergency-number:hover {
+            background-color: #e9ecef;
+        }
+        
+        .emergency-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        .police-icon {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .medical-icon {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .fire-icon {
+            background-color: #e67e22;
+            color: white;
+        }
+        
+        .disaster-icon {
+            background-color: #9b59b6;
+            color: white;
+        }
+        
+        .women-icon {
+            background-color: #ff6b81;
+            color: white;
+        }
+        
+        .child-icon {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .emergency-details {
+            flex-grow: 1;
+        }
+        
+        .emergency-details h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .emergency-details p {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        .emergency-details .description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .helpline-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .helpline-category {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="index.html">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="helpline.html" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="#police" class="dropdown-item">Police</a>
+                        <a href="#medical" class="dropdown-item">Hospital</a>
+                        <a href="#fire" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="helpline-container">
+        <div class="helpline-header">
+            <h1>Emergency Helplines in India</h1>
+            <p>Important contact numbers for emergencies during your travel in India</p>
+        </div>
+
+        <div class="helpline-categories">
+            <div class="helpline-category" id="police">
+                <h2>Police & Security</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">👮</div>
+                    <div class="emergency-details">
+                        <h3>Police Emergency</h3>
+                        <p>100</p>
+                        <div class="description">For reporting crimes, emergencies, and security issues</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🚨</div>
+                    <div class="emergency-details">
+                        <h3>National Emergency Number</h3>
+                        <p>112</p>
+                        <div class="description">Unified emergency response service</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🚔</div>
+                    <div class="emergency-details">
+                        <h3>Tourist Police</h3>
+                        <p>1363</p>
+                        <div class="description">Special assistance for tourists</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpline-category" id="medical">
+                <h2>Medical Emergencies</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon medical-icon">🚑</div>
+                    <div class="emergency-details">
+                        <h3>Ambulance</h3>
+                        <p>108</p>
+                        <div class="description">Emergency medical services</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon medical-icon">⚕️</div>
+                    <div class="emergency-details">
+                        <h3>Medical Helpline</h3>
+                        <p>102</p>
+                        <div class="description">Pregnancy and child health related emergencies</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon medical-icon">🏥</div>
+                    <div class="emergency-details">
+                        <h3>National Health Helpline</h3>
+                        <p>1800-180-1104</p>
+                        <div class="description">Health information and guidance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpline-category" id="fire">
+                <h2>Fire & Disaster</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon fire-icon">🔥</div>
+                    <div class="emergency-details">
+                        <h3>Fire Emergency</h3>
+                        <p>101</p>
+                        <div class="description">Fire brigade and rescue services</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon disaster-icon">🌊</div>
+                    <div class="emergency-details">
+                        <h3>Disaster Management</h3>
+                        <p>1078</p>
+                        <div class="description">National disaster response helpline</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpline-category">
+                <h2>Women & Child Safety</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon women-icon">👩</div>
+                    <div class="emergency-details">
+                        <h3>Women Helpline</h3>
+                        <p>1091</p>
+                        <div class="description">For women in distress</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon women-icon">🛡️</div>
+                    <div class="emergency-details">
+                        <h3>Domestic Violence Helpline</h3>
+                        <p>181</p>
+                        <div class="description">Support for domestic violence victims</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon child-icon">👶</div>
+                    <div class="emergency-details">
+                        <h3>Child Helpline</h3>
+                        <p>1098</p>
+                        <div class="description">Emergency assistance for children</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpline-category">
+                <h2>Travel & Transport</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🚂</div>
+                    <div class="emergency-details">
+                        <h3>Railway Enquiry</h3>
+                        <p>139</p>
+                        <div class="description">Railway information and complaints</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">✈️</div>
+                    <div class="emergency-details">
+                        <h3>Air Transport</h3>
+                        <p>1800-180-1407</p>
+                        <div class="description">Air travel related complaints</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🚗</div>
+                    <div class="emergency-details">
+                        <h3>Road Emergency</h3>
+                        <p>1073</p>
+                        <div class="description">Highway patrol and assistance</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="helpline-category">
+                <h2>Other Important Helplines</h2>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🔍</div>
+                    <div class="emergency-details">
+                        <h3>Missing Persons & Anti-Stalking</h3>
+                        <p>1094</p>
+                        <div class="description">Report missing persons or stalking</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">☎️</div>
+                    <div class="emergency-details">
+                        <h3>Directory Enquiry</h3>
+                        <p>197</p>
+                        <div class="description">Phone directory assistance</div>
+                    </div>
+                </div>
+                
+                <div class="emergency-number">
+                    <div class="emergency-icon police-icon">🆘</div>
+                    <div class="emergency-details">
+                        <h3>COVID-19 Helpline</h3>
+                        <p>1075</p>
+                        <div class="description">COVID-19 related assistance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Left side links -->
+            <div class="footer-left">
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Help & Support</h4>
+                    <a href="#" class="footer-link">Help Us</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+
+            <!-- Center - PARYATAK -->
+            <div class="footer-center">
+                <h2 class="footer-logo">PARYATAK</h2>
+                <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+            </div>
+
+            <!-- Right side links -->
+            <div class="footer-right">
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <a href="helpline.html" class="footer-link">Helpline</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#" class="footer-link">Map</a>
+                    <a href="#" class="footer-link">Directions</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

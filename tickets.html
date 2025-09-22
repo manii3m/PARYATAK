@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARYATAK - Book Tickets</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tickets Page Specific Styles */
+        .tickets-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            color: #2e4600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .transport-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .transport-card {
+            background: linear-gradient(145deg, #ffffff, #f5f5f5);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .transport-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .transport-header {
+            background: linear-gradient(135deg, #2e4600, #d4a017);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .transport-icon {
+            font-size: 1.5em;
+        }
+
+        .transport-content {
+            padding: 20px;
+        }
+
+        .transport-description {
+            margin: 15px 0;
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .transport-features {
+            margin: 20px 0;
+        }
+
+        .transport-features li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-icon {
+            color: #2e4600;
+            font-weight: bold;
+        }
+
+        .external-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            color: #2e4600;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+        }
+
+        .book-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2e4600, #d4a017);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .book-btn:hover {
+            background: linear-gradient(135deg, #d4a017, #2e4600);
+            transform: scale(1.05);
+        }
+
+        .local-booking-form {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .tab-container {
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #2e4600;
+            font-weight: bold;
+            color: #2e4600;
+        }
+
+        .tab:hover {
+            background-color: #f5f5f5;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .partner-logo {
+            max-width: 120px;
+            height: auto;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .transport-options {
+                grid-template-columns: 1fr;
+            }
+
+            .local-booking-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="#">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="helpline.html" class="dropdown-item">Police</a>
+                        <a href="helpline.html" class="dropdown-item">Hospital</a>
+                        <a href="helpline.html" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tickets-container">
+            <!-- Tickets Section Header -->
+            <div class="section-header">
+                <h2>
+                    <span class="icon">🎫</span>
+                    Book Your Transportation
+                </h2>
+                <p>Choose from various transportation options for your Jharkhand adventure</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="all">All Options</div>
+                    <div class="tab" data-tab="public">Public Transport</div>
+                    <div class="tab" data-tab="private">Private Transport</div>
+                    <div class="tab" data-tab="rental">Rental Vehicles</div>
+                </div>
+            </div>
+            
+            <!-- All Options Tab Content -->
+            <div class="tab-content active" id="all">
+                <div class="transport-options">
+                    <!-- Train Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">🚆</span>
+                            Train
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Book train tickets to explore Jharkhand's beautiful landscapes through its extensive rail network.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Access to all major cities and tourist spots</li>
+                                    <li><span class="feature-icon">✓</span> Multiple classes available</li>
+                                    <li><span class="feature-icon">✓</span> Economical and comfortable</li>
+                                </ul>
+                            </div>
+                            <div class="external-links">
+                                <a href="https://www.irctc.co.in" target="_blank" class="external-link">
+                                    <span>Book via IRCTC</span>
+                                </a>
+                            </div>
+                            <a href="https://www.irctc.co.in" target="_blank" class="book-btn">Book Train Tickets</a>
+                        </div>
+                    </div>
+
+                    <!-- Bus Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">🚌</span>
+                            Bus
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Travel by bus to reach remote destinations and enjoy the scenic beauty of Jharkhand.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Extensive network covering remote areas</li>
+                                    <li><span class="feature-icon">✓</span> AC and non-AC options available</li>
+                                    <li><span class="feature-icon">✓</span> Budget-friendly travel option</li>
+                                </ul>
+                            </div>
+                            <div class="external-links">
+                                <a href="https://www.redbus.in" target="_blank" class="external-link">
+                                    <span>Book via RedBus</span>
+                                </a>
+                                <a href="https://www.makemytrip.com/bus-tickets/" target="_blank" class="external-link">
+                                    <span>Book via MakeMyTrip</span>
+                                </a>
+                            </div>
+                            <a href="https://www.redbus.in" target="_blank" class="book-btn">Book Bus Tickets</a>
+                        </div>
+                    </div>
+
+                    <!-- Flight Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">✈️</span>
+                            Flight
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Fly to Jharkhand for a quick and comfortable journey to start your adventure.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Flights to Ranchi, Jamshedpur, and Dhanbad</li>
+                                    <li><span class="feature-icon">✓</span> Multiple airlines available</li>
+                                    <li><span class="feature-icon">✓</span> Fastest way to reach Jharkhand</li>
+                                </ul>
+                            </div>
+                            <div class="external-links">
+                                <a href="https://www.makemytrip.com/flights/" target="_blank" class="external-link">
+                                    <span>Book via MakeMyTrip</span>
+                                </a>
+                                <a href="https://www.goibibo.com/flights/" target="_blank" class="external-link">
+                                    <span>Book via Goibibo</span>
+                                </a>
+                            </div>
+                            <a href="https://www.makemytrip.com/flights/" target="_blank" class="book-btn">Book Flight Tickets</a>
+                        </div>
+                    </div>
+
+                    <!-- Cab Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">🚕</span>
+                            Cab
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Book a cab for convenient and personalized travel within Jharkhand.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Door-to-door service</li>
+                                    <li><span class="feature-icon">✓</span> Multiple vehicle types available</li>
+                                    <li><span class="feature-icon">✓</span> 24/7 booking and support</li>
+                                </ul>
+                            </div>
+                            <form class="local-booking-form">
+                                <div class="form-group">
+                                    <label for="pickup">Pickup Location</label>
+                                    <input type="text" id="pickup" placeholder="Enter pickup location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dropoff">Drop-off Location</label>
+                                    <input type="text" id="dropoff" placeholder="Enter drop-off location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <input type="date" id="date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">Time</label>
+                                    <input type="time" id="time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cab-type">Cab Type</label>
+                                    <select id="cab-type">
+                                        <option value="economy">Economy</option>
+                                        <option value="premium">Premium</option>
+                                        <option value="suv">SUV</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passengers">Passengers</label>
+                                    <input type="number" id="passengers" min="1" max="6" value="1">
+                                </div>
+                            </form>
+                            <button class="book-btn" onclick="bookLocalTransport('cab')">Book Cab Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Bike Rental Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">🏍️</span>
+                            Bike Rental
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Rent a bike to explore Jharkhand's scenic routes and hidden gems at your own pace.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Freedom to explore at your own pace</li>
+                                    <li><span class="feature-icon">✓</span> Multiple bike models available</li>
+                                    <li><span class="feature-icon">✓</span> Helmets and safety gear included</li>
+                                </ul>
+                            </div>
+                            <form class="local-booking-form">
+                                <div class="form-group">
+                                    <label for="pickup-location">Pickup Location</label>
+                                    <input type="text" id="pickup-location" placeholder="Enter pickup location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rental-days">Rental Days</label>
+                                    <input type="number" id="rental-days" min="1" max="30" value="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pickup-date">Pickup Date</label>
+                                    <input type="date" id="pickup-date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pickup-time">Pickup Time</label>
+                                    <input type="time" id="pickup-time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="bike-type">Bike Type</label>
+                                    <select id="bike-type">
+                                        <option value="scooter">Scooter</option>
+                                        <option value="standard">Standard</option>
+                                        <option value="cruiser">Cruiser</option>
+                                        <option value="sports">Sports</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="license">Driving License Number</label>
+                                    <input type="text" id="license" placeholder="Enter license number">
+                                </div>
+                            </form>
+                            <button class="book-btn" onclick="bookLocalTransport('bike')">Book Bike Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Car Rental Option -->
+                    <div class="transport-card">
+                        <div class="transport-header">
+                            <span class="transport-icon">🚗</span>
+                            Car Rental
+                        </div>
+                        <div class="transport-content">
+                            <div class="transport-description">
+                                Rent a car for complete freedom to explore Jharkhand with comfort and convenience.
+                            </div>
+                            <div class="transport-features">
+                                <ul>
+                                    <li><span class="feature-icon">✓</span> Self-drive or chauffeur options</li>
+                                    <li><span class="feature-icon">✓</span> Wide range of vehicles available</li>
+                                    <li><span class="feature-icon">✓</span> Flexible rental periods</li>
+                                </ul>
+                            </div>
+                            <form class="local-booking-form">
+                                <div class="form-group">
+                                    <label for="car-pickup">Pickup Location</label>
+                                    <input type="text" id="car-pickup" placeholder="Enter pickup location">
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-rental-days">Rental Days</label>
+                                    <input type="number" id="car-rental-days" min="1" max="30" value="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-pickup-date">Pickup Date</label>
+                                    <input type="date" id="car-pickup-date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-pickup-time">Pickup Time</label>
+                                    <input type="time" id="car-pickup-time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="car-type">Car Type</label>
+                                    <select id="car-type">
+                                        <option value="hatchback">Hatchback</option>
+                                        <option value="sedan">Sedan</option>
+                                        <option value="suv">SUV</option>
+                                        <option value="luxury">Luxury</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="driver">Driver Option</label>
+                                    <select id="driver">
+                                        <option value="self">Self Drive</option>
+                                        <option value="chauffeur">With Chauffeur</option>
+                                    </select>
+                                </div>
+                            </form>
+                            <button class="book-btn" onclick="bookLocalTransport('car')">Book Car Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Public Transport Tab Content -->
+            <div class="tab-content" id="public">
+                <!-- Public transport options will be shown here -->
+            </div>
+
+            <!-- Private Transport Tab Content -->
+            <div class="tab-content" id="private">
+                <!-- Private transport options will be shown here -->
+            </div>
+
+            <!-- Rental Vehicles Tab Content -->
+            <div class="tab-content" id="rental">
+                <!-- Rental vehicle options will be shown here -->
+            </div>
+
+            <!-- Partner Logos -->
+            <div class="section-header">
+                <h3>Our Trusted Partners</h3>
+            </div>
+            <div class="partner-logos">
+                <div class="partner-logo">IRCTC</div>
+                <div class="partner-logo">MakeMyTrip</div>
+                <div class="partner-logo">RedBus</div>
+                <div class="partner-logo">Goibibo</div>
+                <div class="partner-logo">Ola</div>
+                <div class="partner-logo">Uber</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <!-- Left side links -->
+            <div class="footer-left">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Our Team</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Help & Support</h4>
+                    <a href="#" class="footer-link">Help Us</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+
+            <!-- Center - PARYATAK -->
+            <div class="footer-center">
+                <h2 class="footer-logo">PARYATAK</h2>
+                <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+            </div>
+
+            <!-- Right side links -->
+            <div class="footer-right">
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <a href="#" class="footer-link">Helpline</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#" class="footer-link">Map</a>
+                    <a href="#" class="footer-link">Directions</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // Tickets Page Specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab Functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show the corresponding tab content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Add class to body for CSS targeting
+            document.body.classList.add('tickets-page');
+            
+            // Populate the other tabs with filtered content
+            populateFilteredTabs();
+        });
+        
+        // Function to populate filtered tabs
+        function populateFilteredTabs() {
+            // Clone cards from the "all" tab to the appropriate filtered tabs
+            const allCards = document.querySelectorAll('#all .transport-card');
+            
+            // Public transport tab (train, bus, flight)
+            const publicTab = document.getElementById('public');
+            const publicTransport = Array.from(allCards).filter(card => {
+                const header = card.querySelector('.transport-header').textContent.trim();
+                return header.includes('Train') || header.includes('Bus') || header.includes('Flight');
+            });
+            
+            const publicGrid = document.createElement('div');
+            publicGrid.className = 'transport-options';
+            publicTransport.forEach(card => {
+                publicGrid.appendChild(card.cloneNode(true));
+            });
+            publicTab.appendChild(publicGrid);
+            
+            // Private transport tab (cab)
+            const privateTab = document.getElementById('private');
+            const privateTransport = Array.from(allCards).filter(card => {
+                const header = card.querySelector('.transport-header').textContent.trim();
+                return header.includes('Cab');
+            });
+            
+            const privateGrid = document.createElement('div');
+            privateGrid.className = 'transport-options';
+            privateTransport.forEach(card => {
+                privateGrid.appendChild(card.cloneNode(true));
+            });
+            privateTab.appendChild(privateGrid);
+            
+            // Rental vehicles tab (bike, car)
+            const rentalTab = document.getElementById('rental');
+            const rentalVehicles = Array.from(allCards).filter(card => {
+                const header = card.querySelector('.transport-header').textContent.trim();
+                return header.includes('Bike') || header.includes('Car');
+            });
+            
+            const rentalGrid = document.createElement('div');
+            rentalGrid.className = 'transport-options';
+            rentalVehicles.forEach(card => {
+                rentalGrid.appendChild(card.cloneNode(true));
+            });
+            rentalTab.appendChild(rentalGrid);
+        }
+        
+        // Function to handle local transport booking
+        function bookLocalTransport(type) {
+            let message = '';
+            
+            switch(type) {
+                case 'cab':
+                    const pickup = document.getElementById('pickup').value;
+                    const dropoff = document.getElementById('dropoff').value;
+                    const date = document.getElementById('date').value;
+                    const time = document.getElementById('time').value;
+                    const cabType = document.getElementById('cab-type').value;
+                    
+                    if (!pickup || !dropoff || !date || !time) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    message = `Your ${cabType} cab has been booked from ${pickup} to ${dropoff} on ${date} at ${time}. You will receive a confirmation shortly.`;
+                    break;
+                    
+                case 'bike':
+                    const pickupLocation = document.getElementById('pickup-location').value;
+                    const rentalDays = document.getElementById('rental-days').value;
+                    const pickupDate = document.getElementById('pickup-date').value;
+                    const bikeType = document.getElementById('bike-type').value;
+                    
+                    if (!pickupLocation || !pickupDate) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    message = `Your ${bikeType} bike has been booked for ${rentalDays} day(s) from ${pickupDate}. Pickup location: ${pickupLocation}. You will receive a confirmation shortly.`;
+                    break;
+                    
+                case 'car':
+                    const carPickup = document.getElementById('car-pickup').value;
+                    const carRentalDays = document.getElementById('car-rental-days').value;
+                    const carPickupDate = document.getElementById('car-pickup-date').value;
+                    const carType = document.getElementById('car-type').value;
+                    const driverOption = document.getElementById('driver').value;
+                    
+                    if (!carPickup || !carPickupDate) {
+                        alert('Please fill in all required fields');
+                        return;
+                    }
+                    
+                    message = `Your ${carType} car has been booked for ${carRentalDays} day(s) from ${carPickupDate} (${driverOption} drive). Pickup location: ${carPickup}. You will receive a confirmation shortly.`;
+                    break;
+            }
+            
+            alert(message);
+        }
+    </script>
+</body>
+</html>

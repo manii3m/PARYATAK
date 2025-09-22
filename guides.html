@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Guides - PARYATAK</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Bebas+Neue&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .guides-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .guides-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .guides-header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .guides-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .guide-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .guide-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .guide-card:hover .guide-image img {
+            transform: scale(1.05);
+        }
+        
+        .guide-info {
+            padding: 20px;
+        }
+        
+        .guide-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-family: 'Exo 2', sans-serif;
+        }
+        
+        .guide-specialty {
+            color: #7f8c8d;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .guide-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .stars {
+            color: #f1c40f;
+            margin-right: 10px;
+        }
+        
+        .rating-count {
+            color: #95a5a6;
+            font-size: 14px;
+        }
+        
+        .guide-description {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .guide-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .guide-price span {
+            font-size: 14px;
+            color: #7f8c8d;
+            font-weight: normal;
+        }
+        
+        .guide-languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .language-tag {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .book-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .book-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .guide-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .feature i {
+            margin-right: 5px;
+            color: #3498db;
+        }
+        
+        .filter-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+            overflow: visible;
+        }
+        
+        .filter-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-button {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        @media (max-width: 768px) {
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .guide-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo" style="font-size: x-large; font-family: 'Courier New', Courier, monospace;">
+                <a href="index.html">PARYATAK</a>
+            </div>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="service.html">About</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <div class="dropdown-menu">
+                        <a href="destination.html" class="dropdown-item">Top Destinations</a>
+                        <a href="guides.html" class="dropdown-item">Guides</a>
+                        <a href="package.html" class="dropdown-item">Top Packages</a>
+                        <a href="coupon.html" class="dropdown-item">Explore Discount</a>
+                        <a href="tickets.html" class="dropdown-item">Book Tickets</a>
+                        <a href="carbon-calculator.html" class="dropdown-item">Carbon Emission Calculator</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="helpline.html" class="dropdown-toggle">Helpline</a>
+                    <div class="dropdown-menu">
+                        <a href="helpline.html#police" class="dropdown-item">Police</a>
+                        <a href="helpline.html#medical" class="dropdown-item">Hospital</a>
+                        <a href="helpline.html#fire" class="dropdown-item">Fire</a>
+                    </div>
+                </div>
+                <a href="login.html">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="guides-container">
+        <div class="guides-header">
+            <h1>Expert Local Guides</h1>
+            <p>Discover Jharkhand with our experienced local guides who know every hidden gem and fascinating story about the region. Book your perfect guide for an unforgettable journey.</p>
+        </div>
+
+        <div class="filter-section" style="position: static; overflow: auto;">
+            <h3 class="filter-title">Filter Guides By:</h3>
+            <div class="filter-options">
+                <button class="filter-button active">All Guides</button>
+                <button class="filter-button">Adventure Specialists</button>
+                <button class="filter-button">Cultural Experts</button>
+                <button class="filter-button">Nature & Wildlife</button>
+                <button class="filter-button">Historical Tours</button>
+                <button class="filter-button">Top Rated</button>
+            </div>
+        </div>
+
+        <div class="guides-grid">
+            <!-- Guide 1 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Rajesh Kumar">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Rajesh Kumar</h3>
+                    <p class="guide-specialty">Adventure & Trekking Specialist</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-count">4.5 (128 reviews)</span>
+                    </div>
+                    <p class="guide-description">Experienced trekking guide with 8+ years exploring Jharkhand's mountains and forests. Expert in adventure activities and wildlife spotting.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Trekking</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-campground"></i>
+                            <span>Camping</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hiking"></i>
+                            <span>Hiking</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                        <span class="language-tag">Bengali</span>
+                    </div>
+                    <p class="guide-price">₹2,500 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+
+            <!-- Guide 2 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Priya Singh">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Priya Singh</h3>
+                    <p class="guide-specialty">Cultural & Heritage Expert</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-count">5.0 (96 reviews)</span>
+                    </div>
+                    <p class="guide-description">Cultural historian specializing in tribal heritage and traditions of Jharkhand. Offers immersive experiences into local customs, arts, and cuisine.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-landmark"></i>
+                            <span>Heritage</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <span>Cuisine</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-theater-masks"></i>
+                            <span>Arts</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                        <span class="language-tag">Santhali</span>
+                    </div>
+                    <p class="guide-price">₹2,200 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+
+            <!-- Guide 3 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Amit Verma">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Amit Verma</h3>
+                    <p class="guide-specialty">Wildlife & Nature Expert</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-count">4.0 (75 reviews)</span>
+                    </div>
+                    <p class="guide-description">Former forest department official with extensive knowledge of Jharkhand's wildlife sanctuaries and natural reserves. Expert in bird watching and animal tracking.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-paw"></i>
+                            <span>Wildlife</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tree"></i>
+                            <span>Forests</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-binoculars"></i>
+                            <span>Bird Watching</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                    </div>
+                    <p class="guide-price">₹2,800 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+
+            <!-- Guide 4 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Meera Joshi">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Meera Joshi</h3>
+                    <p class="guide-specialty">Historical & Archaeological Expert</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="rating-count">4.7 (112 reviews)</span>
+                    </div>
+                    <p class="guide-description">History professor with expertise in ancient monuments and archaeological sites of Jharkhand. Brings historical stories to life with engaging narratives.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-monument"></i>
+                            <span>Monuments</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-archway"></i>
+                            <span>Architecture</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-book-open"></i>
+                            <span>History</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                        <span class="language-tag">Urdu</span>
+                    </div>
+                    <p class="guide-price">₹2,400 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+
+            <!-- Guide 5 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Vikram Rai">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Vikram Rai</h3>
+                    <p class="guide-specialty">Adventure & Photography Guide</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-count">4.9 (87 reviews)</span>
+                    </div>
+                    <p class="guide-description">Professional photographer and adventure enthusiast. Specializes in photography tours to capture Jharkhand's most scenic locations and waterfalls.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-camera"></i>
+                            <span>Photography</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Waterfalls</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mountain"></i>
+                            <span>Landscapes</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                        <span class="language-tag">Nagpuri</span>
+                    </div>
+                    <p class="guide-price">₹3,000 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+
+            <!-- Guide 6 -->
+            <div class="guide-card">
+                <div class="guide-image">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Sanjay Murmu">
+                </div>
+                <div class="guide-info">
+                    <h3 class="guide-name">Sanjay Murmu</h3>
+                    <p class="guide-specialty">Tribal Culture & Eco-Tourism</p>
+                    <div class="guide-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span class="rating-count">4.2 (65 reviews)</span>
+                    </div>
+                    <p class="guide-description">Born and raised in a tribal village, Sanjay offers authentic insights into tribal life, sustainable practices, and eco-tourism opportunities in Jharkhand.</p>
+                    <div class="guide-features">
+                        <div class="feature">
+                            <i class="fas fa-leaf"></i>
+                            <span>Eco-Tourism</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-drum"></i>
+                            <span>Tribal Culture</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-seedling"></i>
+                            <span>Sustainability</span>
+                        </div>
+                    </div>
+                    <div class="guide-languages">
+                        <span class="language-tag">English</span>
+                        <span class="language-tag">Hindi</span>
+                        <span class="language-tag">Santhali</span>
+                        <span class="language-tag">Ho</span>
+                    </div>
+                    <p class="guide-price">₹1,800 <span>per day</span></p>
+                    <a href="#" class="book-button">Book This Guide</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <!-- Left side links -->
+            <div class="footer-left">
+                <div class="footer-section">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">Twitter</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Help & Support</h4>
+                    <a href="#" class="footer-link">Help Us</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+
+            <!-- Center - PARYATAK -->
+            <div class="footer-center">
+                <h2 class="footer-logo">PARYATAK</h2>
+                <p class="footer-tagline">Explore the Beauty of Jharkhand</p>
+            </div>
+
+            <!-- Right side links -->
+            <div class="footer-right">
+                <div class="footer-section">
+                    <h4>Contact & Support</h4>
+                    <a href="helpline.html" class="footer-link">Helpline</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#" class="footer-link">Map</a>
+                    <a href="#" class="footer-link">Directions</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 PARYATAK. All rights reserved. | Made with ❤️ for Jharkhand Tourism</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real application, you would filter the guides here
+                    // For now, we'll just show a message
+                    console.log('Filter selected:', this.textContent);
+                });
+            });
+            
+            // Book button functionality
+            const bookButtons = document.querySelectorAll('.book-button');
+            
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const guideName = this.closest('.guide-card').querySelector('.guide-name').textContent;
+                    alert(`Booking process initiated for ${guideName}. Please login or create an account to complete your booking.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
