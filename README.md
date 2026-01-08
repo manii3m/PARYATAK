@@ -1,3 +1,7 @@
+<img width="1898" height="924" alt="image" src="https://github.com/user-attachments/assets/43186100-178b-41e2-9e52-b890a9ec6670" />
+
+
+
 🌍 PARYATAK
 
 PARYATAK is a tourism and travel website built with HTML, CSS, and JavaScript.
