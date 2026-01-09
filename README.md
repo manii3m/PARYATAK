@@ -1,14 +1,36 @@
-<img width="1898" height="924" alt="image" src="https://github.com/user-attachments/assets/43186100-178b-41e2-9e52-b890a9ec6670" />
+<div align="center">
 
+# 🌍 PARYATAK
 
+### Your Ultimate Travel & Tourism Companion
 
-🌍 PARYATAK
+A modern, interactive tourism and travel website showcasing destinations, services, and travel planning tools.
 
-PARYATAK is a tourism and travel website built with HTML, CSS, and JavaScript.
+[![License](https://img.shields.io/badge/License-Open%20Source-green)](./LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-manii3m-blue)](https://github.com/manii3m)
+[![HTML5](https://img.shields.io/badge/HTML5-E34C26?logo=html5&logoColor=white)](https://html.spec.whatwg.org/)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://www.javascript.com/)
 
-It showcases travel destinations and useful services for users interested in exploring places, booking tours, and accessing travel-related information.
+</div>
 
-🧭 About
+---
+
+## 📋 Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Pages Overview](#pages-overview)
+- [Getting Started](#getting-started)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## 🧭 About
 
 PARYATAK is a static web project focused on tourism and travel exploration.
 
