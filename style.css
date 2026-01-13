@@ -299,6 +299,7 @@ body:not(.index-page) .navbar a {
 }
 
 .card {
+    text-decoration: none;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(46, 70, 0, 0.1), 0 4px 10px rgba(212, 160, 23, 0.1);
@@ -330,6 +331,7 @@ body:not(.index-page) .navbar a {
 }
 
 .card h3 {
+    text-decoration: none;
   margin: 12px 0;
   font-size: 18px;
   color: #2e4600;
